@@ -39,8 +39,7 @@ class BankAccount {
         // your code here
         if (this.balance - amount >= 0) {
             this.balance -= amount;
-            console.log(`${this.name} your new balance is ${this.balance}`);
-            return true;
+            return (`${this.name} you have withdrawn ${amount} andyour new balance is ${this.balance}`);
         }
         return false;
     }
@@ -57,3 +56,4 @@ class BankAccount {
 const client = new BankAccount('sharon', 5000);
 //console.log(client.getBalance());
 console.log(client.deposit());
+console.log(client.withdraw());
