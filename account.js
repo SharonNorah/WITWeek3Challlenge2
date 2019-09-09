@@ -54,6 +54,8 @@ class BankAccount {
 
 
 const client = new BankAccount('sharon', 5000);
-//console.log(client.getBalance());
+console.log(client.getBalance());
 console.log(client.deposit());
 console.log(client.withdraw());
+//console.log(client.open());
+//console.log(client.close());
