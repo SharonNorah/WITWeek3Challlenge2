@@ -1,61 +1,57 @@
 class BankAccount {
-    constructor(name, initialDeposit) {
-        // your code here
+    constructor(name, balance, accountNumber, accountStatus) {
         this.name = name;
-        this.balance = initialDeposit;
-        this.history = [];
+        this.balance = 0;
+        this.accountStatus = accountStatus;
+        this.accountNumber = accountNumber;
     }
 
-    getBalance(initialDeposit) {
-        // your code here
-        if (this.balance < 0) {
-            return false;
-        } else {
-            console.log(`${this.name} your balance is ${this.balance}`);
-        }
-
-    }
-
-    /* open(name, amount) {
-         // your code here
-         do {
- 
-         }*/
-
-    deposit(amount) {
-        // your code here
-        if (amount < 0) {
-            return false;
-            console.log('Amount must be positive!');
-        } else {
+    getBalance(amount) {
+        if (this.accountStatus === 'active' && (this.balance = 0)) {
             this.balance += amount;
-            this.history.push(amount);
-            return (`Deposit: ${this.name} your new balance is ${this.balance}`);
+            return `${this.name}, your balance is ${this.balance}`
         }
-
+        return `this account is inactive`;
     }
 
+    open(name, accountNumber) {
+        if (typeof this.name === 'string' && (Number.isInteger(accountNumber))) {
+            return `${this.name}, your account has been opened your account number is ${this.accountNumber}`;
+        }
+        return "name must be characters and accountNumber must be an integer";
+    }
+    deposit(amount) {
+        if (this.balance >= 0 && this.accountStatus === 'active') {
+            this.balance += amount;
+            return (`${this.name}, you have deposited ${amount} and your new balance is ${this.balance}`);
+        }
+        return "this account is inactive";
+    }
     withdraw(amount) {
-        // your code here
-        if (this.balance - amount >= 0) {
-            this.balance -= amount;
-            return (`${this.name} you have withdrawn ${amount} andyour new balance is ${this.balance}`);
+        this.balance -= amount;
+        if (this.balance - amount >= 0 && this.accountStatus === 'active') {
+            return (`${this.name}, you have withdrawn ${amount} and your new balance is ${this.balance}`);
         }
-        return false;
+        return "you either have insufficient funds or the account is closed";
     }
-
-
+    close(accountStatus) {
+        if (this.accountStatus === 'inactive') {
+            return "this account is closed, you cant carry out transactions";
+        }
+        return `${this.name}, the account is active, carry out your transactions`;
+    }
 }
+module.exports = BankAccount;
+let client = new BankAccount('sharon', 0, 22850, 'active');
+console.log(client.open('sharon', 22850));
+console.log(client.getBalance(0));
+console.log(client.deposit(5000));
+console.log(client.withdraw(2000));
+console.log(client.close());
 
-/*close(name, initialDeposit) {
-
-
-}*/
-
-
-const client = new BankAccount('sharon', 5000);
-console.log(client.getBalance());
-console.log(client.deposit());
-console.log(client.withdraw());
-//console.log(client.open());
-//console.log(client.close());
+client = new BankAccount('norah', 0, 22440, 'inactive');
+console.log(client.open('norah', 22440));
+console.log(client.getBalance(0));
+console.log(client.deposit(5000));
+console.log(client.withdraw(2000));
+console.log(client.close());
